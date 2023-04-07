@@ -12,6 +12,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("com.itextpdf:itextpdf:5.5.13")
+    implementation("com.github.javafaker:javafaker:1.0.2")
 }
 
 tasks.test {

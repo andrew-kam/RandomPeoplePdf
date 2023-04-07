@@ -1,7 +1,18 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    println("Введите количество людей ($minCountPeoples-$maxCountPeoples):")
+    val countPeoples = readlnOrNull()?.toIntOrNull() ?: 0
+    if (countPeoples < minCountPeoples || countPeoples > maxCountPeoples) {
+        println("Некорректное количество людей!")
+        return
+    }
+
+    println("Введите путь для сохранения файла\n(например D:\\TempPdf\\people.pdf):")
+    val filePath = readlnOrNull() ?: ""
+    if (filePath.isEmpty()) {
+        println("Путь не может быть пустым!")
+        return
+    }
+
 }
+

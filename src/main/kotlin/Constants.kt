@@ -60,4 +60,6 @@ val middleNamesWoman = listOf(
     "Николаевна", "Олеговна", "Павловна", "Петровна"
 )
 
-
+const val nameCountry = "Россия"
+const val male = "МУЖ"
+const val female = "ЖЕН"

@@ -1,4 +1,7 @@
 import kotlin.random.Random
+import com.github.javafaker.Faker
+import java.util.Locale
+
 
 class GeneratePerson {
 
@@ -58,6 +61,8 @@ class GeneratePerson {
         }
         return fullNameAndGender
     }
+
+    private val fake = Faker(Locale("ru_RU"))
 
 
 

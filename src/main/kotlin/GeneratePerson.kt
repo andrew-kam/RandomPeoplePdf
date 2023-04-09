@@ -18,13 +18,13 @@ class GeneratePerson {
         val gender = if (choiceGender) male else female
         val (birthDate, age) = createBirthDateAndAge()
         val birthPlace = fake.address().city()
-        val postalCode = Random.nextInt(minZipCode, maxZipCode)
+        val postalCode = Random.nextInt(minZipCode, maxZipCode).toString()
         val country = nameCountry
         val region = regionNames.random()
         val city = fake.address().city()
         val street = streetNames.random()
-        val houseNumber = Random.nextInt(minHouseNumber, maxHouseNumber)
-        val apartmentNumber = Random.nextInt(minApartmentNumber, maxApartmentNumber)
+        val houseNumber = Random.nextInt(minHouseNumber, maxHouseNumber).toString()
+        val apartmentNumber = Random.nextInt(minApartmentNumber, maxApartmentNumber).toString()
 
         return Person(
             firstName,
@@ -45,7 +45,7 @@ class GeneratePerson {
     }
 
 
-    private fun createBirthDateAndAge(): Pair<String, Int> {
+    private fun createBirthDateAndAge(): Pair<String, String> {
 
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
@@ -56,7 +56,7 @@ class GeneratePerson {
         val endDate = currentDate.minus(minPeriod)
         val randomDate = startDate.plusDays(Random.nextLong(startDate.until(endDate, ChronoUnit.DAYS)))
         val randomDateString = randomDate.format(formatter)
-        val age = Period.between(randomDate, currentDate).years
+        val age = Period.between(randomDate, currentDate).years.toString()
         return Pair(randomDateString, age)
     }
 }

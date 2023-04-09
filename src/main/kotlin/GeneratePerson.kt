@@ -1,5 +1,9 @@
 import kotlin.random.Random
 import com.github.javafaker.Faker
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.Locale
 
 
@@ -7,30 +11,20 @@ class GeneratePerson {
 
     private val fake = Faker(Locale("ru_RU"))
 
-    fun generatePerson(): Person {
-
-        val fullNameAndGender = generateFullNameAndGender()
-
-        val firstName = fullNameAndGender[0]
-        val lastName = fullNameAndGender[1]
-        val middleName = fullNameAndGender[2]
-
-        val age = 30
-
-        val gender = fullNameAndGender[3]
-
-//    val birthDate = fake.date().birthday(18, 88)
-        val birthDate = "01-01-1970"
-
+    fun generatePerson(choiceGender: Boolean): Person {
+        val firstName = if (choiceGender) firstNamesMan.random() else firstNamesWoman.random()
+        val lastName = if (choiceGender) lastNamesMan.random() else lastNamesWoman.random()
+        val middleName = if (choiceGender) middleNamesMan.random() else middleNamesWoman.random()
+        val gender = if (choiceGender) male else female
+        val (birthDate, age) = createBirthDateAndAge()
         val birthPlace = fake.address().city()
-        val postalCode = fake.address().zipCode()
+        val postalCode = Random.nextInt(minZipCode, maxZipCode)
         val country = nameCountry
-        val region = generateRegion()
-
+        val region = regionNames.random()
         val city = fake.address().city()
-        val street = fake.address().streetName()
-        val houseNumber = Random.nextInt(1, 200)
-        val apartmentNumber = Random.nextInt(1, 500)
+        val street = streetNames.random()
+        val houseNumber = Random.nextInt(minHouseNumber, maxHouseNumber)
+        val apartmentNumber = Random.nextInt(minApartmentNumber, maxApartmentNumber)
 
         return Person(
             firstName,
@@ -51,34 +45,18 @@ class GeneratePerson {
     }
 
 
-    private fun generateFullNameAndGender(): List<String> {
-        val fullNameAndGender = mutableListOf<String>()
-        if (Random.nextBoolean()) {
-            fullNameAndGender.add(firstNamesMan.random())
-            fullNameAndGender.add(lastNamesMan.random())
-            fullNameAndGender.add(middleNamesMan.random())
-            fullNameAndGender.add(male)
-        } else {
-            fullNameAndGender.add(firstNamesWoman.random())
-            fullNameAndGender.add(lastNamesWoman.random())
-            fullNameAndGender.add(middleNamesWoman.random())
-            fullNameAndGender.add(female)
-        }
-        return fullNameAndGender
+    private fun createBirthDateAndAge(): Pair<String, Int> {
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
+        val currentDate = LocalDate.now()
+        val maxPeriod = Period.ofYears(maxAge)
+        val minPeriod = Period.ofYears(minAge)
+        val startDate = currentDate.minus(maxPeriod)
+        val endDate = currentDate.minus(minPeriod)
+        val randomDate = startDate.plusDays(Random.nextLong(startDate.until(endDate, ChronoUnit.DAYS)))
+        val randomDateString = randomDate.format(formatter)
+        val age = Period.between(randomDate, currentDate).years
+        return Pair(randomDateString, age)
     }
-
-    private fun generateRegion(): String {
-        var count = 0
-        var fullRegion = listOf<String>()
-        while (fullRegion.size != 2 || fullRegion[1] != "область") {
-            fullRegion = fake.address().state().split(" ")
-        }
-        return fullRegion[0]
-    }
-
-
-
-
-
-
 }

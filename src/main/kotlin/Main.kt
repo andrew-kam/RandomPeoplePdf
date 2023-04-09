@@ -1,3 +1,6 @@
+import java.util.*
+import kotlin.random.Random
+
 fun main() {
 
     val countPeople = inputCountPeople()
@@ -5,22 +8,22 @@ fun main() {
         println("Введены некорректные данные, работа программы завершена!")
         return
     }
-    println(countPeople)
-
-    val filePath = inputFilePath()
-    if (filePath.isEmpty()) {
-        println("Путь к файлу не может быть пустым, работа программы завершена!")
-    }
-    println(filePath)
-
-
+//
+//    val filePath = inputFilePath()
+//    if (filePath.isEmpty()) {
+//        println("Путь к файлу не может быть пустым, работа программы завершена!")
+//    }
+//
+//
     val people = mutableListOf<Person>()
     val personGenerator = GeneratePerson()
-    repeat(countPeople) {
-        people.add(personGenerator.generatePerson())
+    repeat(10) {
+        people.add(personGenerator.generatePerson(Random.nextBoolean()))
     }
 
-
+    people.forEach { human ->
+        println(human)
+    }
 
 //    try {
 //        createPdf(filePath, people)
@@ -31,9 +34,9 @@ fun main() {
 //        return
 //    }
 
-    people.forEach { human ->
-        println(human)
-    }
+
+
+
 
 
 }

@@ -13,16 +13,11 @@ fun main() {
         println("Путь к файлу не может быть пустым, работа программы завершена!")
     }
 
-
     val people = mutableListOf<Person>()
     val personGenerator = GeneratePerson()
     repeat(countPeople) {
         people.add(personGenerator.generatePerson(Random.nextBoolean()))
     }
-
-//    people.forEach { human ->
-//        println(human)
-//    }
 
     val pdfCreator = CreatePdf()
     try {

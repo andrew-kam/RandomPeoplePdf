@@ -6,9 +6,3 @@ fun inputCountPeople(): Int {
     }
     return countPeople
 }
-
-fun inputFilePath(): String {
-    println("Введите путь для сохранения файла\n(например D:\\{название папки}\\people.pdf - для Windows\n" +
-            "/Users/{имя пользователя}/Downloads/people.pdf - для macOS):")
-    return readlnOrNull() ?: ""
-}

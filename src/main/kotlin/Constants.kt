@@ -18,6 +18,8 @@ const val female = "ЖЕН"
 const val maxAge = 80
 const val minAge = 18
 
+const val fileName = "people.pdf"
+
 val tableFields = listOf(
     "Имя", "Фамилия", "Отчество", "Возраст","Пол", "Дата рождения", "Место рождения",
     "Индекс", "Страна", "Область", "Город", "Улица", "Дом", "Квартира"

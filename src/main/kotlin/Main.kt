@@ -1,4 +1,6 @@
+import java.io.FileNotFoundException
 import kotlin.random.Random
+
 
 fun main() {
 
@@ -11,6 +13,7 @@ fun main() {
     val filePath = inputFilePath()
     if (filePath.isEmpty()) {
         println("Путь к файлу не может быть пустым, работа программы завершена!")
+        return
     }
 
     val people = mutableListOf<Person>()
@@ -23,7 +26,12 @@ fun main() {
     try {
         pdfCreator.createPdf(filePath, people)
         println("Файл создан. Путь: $filePath")
-    } catch (e: Exception) {
+    }
+    catch (e: FileNotFoundException) {
+        println("Некорректный путь для сохранения файла, работа программы завершена!.")
+        return
+    }
+    catch (e: Exception) {
         println("Ошибка при создании файла.")
         e.printStackTrace()
         return

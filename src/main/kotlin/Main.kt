@@ -13,10 +13,10 @@ fun main() {
     val people = mutableListOf<Person>()
     val personGenerator = GeneratePerson()
     repeat(countPeople) {
-        people.add(personGenerator.generatePerson(Random.nextBoolean()))
+        people.add(personGenerator.generatePerson(choiceGender = Random.nextBoolean()))
     }
 
     val pdfCreator = CreatePdf()
-    pdfCreator.createPdf(fileName, people)
-    println("Файл создан. Путь: ${File("people.pdf").absolutePath}")
+    pdfCreator.createPdf(fileNamePdf, people)
+    println("Файл создан. Путь: ${File(fileNamePdf).absolutePath}")
 }

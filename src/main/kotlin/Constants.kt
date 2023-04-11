@@ -1,26 +1,42 @@
-const val maxCountPeoples = 30
-const val minCountPeoples = 1
+import com.github.javafaker.Faker
+import java.util.Locale
 
-const val minZipCode = 101000
-const val maxZipCode = 692760
+const val MAX_COUNT_PEOPLE = 30
+const val MIN_COUNT_PEOPLE = 1
 
-const val minHouseNumber = 1
-const val maxHouseNumber = 200
+const val MIN_ZIP_CODE = 101000
+const val MAX_ZIP_CODE = 692760
 
-const val minApartmentNumber = 1
-const val maxApartmentNumber = 500
+const val MIN_HOUSE_NUMBER = 1
+const val MAX_HOUSE_NUMBER = 200
 
-const val nameCountry = "Россия"
+const val MIN_APARTMENT_NUMBER = 1
+const val MAX_APARTMENT_NUMBER = 500
 
-const val male = "МУЖ"
-const val female = "ЖЕН"
+const val NAME_COUNTRY = "Россия"
 
-const val maxAge = 80
-const val minAge = 18
+const val DATE_FORMAT = "dd-MM-yyyy"
 
-const val fileNamePdf = "people.pdf"
+val FAKE = Faker(Locale("ru_RU"))
 
-val firstNamesMan = listOf(
+const val MALE = "МУЖ"
+const val FEMALE = "ЖЕН"
+
+const val MAX_AGE = 80
+const val MIN_AGE = 18
+
+const val PAGE_WIDTH = 100f
+const val PATH_FONT = "src/main/resources/fonts/arial.ttf"
+const val FONT_SIZE = 4f
+
+const val FILE_NAME_PDF = "people.pdf"
+
+val TABLE_FIELD_NAMES = listOf(
+    "Имя", "Фамилия", "Отчество", "Возраст","Пол", "Дата рождения", "Место рождения",
+    "Индекс", "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
+)
+
+val FIRST_NAMES_MAN = listOf(
     "Артём", "Александр", "Михаил", "Максим", "Иван",
     "Даниил", "Дмитрий", "Кирилл", "Никита", "Егор",
     "Андрей", "Владимир", "Сергей", "Павел", "Антон",
@@ -29,7 +45,7 @@ val firstNamesMan = listOf(
     "Григорий", "Юрий", "Олег", "Николай", "Виталий"
 )
 
-val firstNamesWoman = listOf(
+val FIRST_NAMES_WOMAN = listOf(
     "Софья", "Анастасия", "Дарья", "Мария", "Анна",
     "Виктория", "Полина", "Елизавета", "Екатерина", "Ксения",
     "Алина", "Алиса", "Алла", "Альбина", "Амина",
@@ -38,7 +54,7 @@ val firstNamesWoman = listOf(
     "Арабелла", "Ариана", "Белла", "Валерия", "Варвара"
 )
 
-val lastNamesMan = listOf(
+val LAST_NAMES_MAN = listOf(
     "Иванов", "Смирнов", "Кузнецов", "Попов", "Васильев",
     "Петров", "Соколов", "Михайлов", "Новиков", "Фёдоров",
     "Морозов", "Волков", "Лебедев", "Козлов", "Зайцев",
@@ -47,7 +63,7 @@ val lastNamesMan = listOf(
     "Макаров", "Андреев", "Ковалёв", "Ильин", "Гусев"
 )
 
-val lastNamesWoman = listOf(
+val LAST_NAMES_WOMAN = listOf(
     "Иванова", "Петрова", "Сидорова", "Кузнецова", "Смирнова",
     "Козлова", "Морозова", "Новикова", "Волкова", "Зайцева",
     "Павлова", "Соколова", "Михайлова", "Федорова", "Медведева",
@@ -56,7 +72,7 @@ val lastNamesWoman = listOf(
     "Андреева", "Королева", "Гусева", "Киселева", "Тихонова"
 )
 
-val middleNamesMan = listOf(
+val MIDDLE_NAMES_MAN = listOf(
     "Александрович", "Андреевич", "Аркадьевич", "Артёмович", "Борисович",
     "Вадимович", "Валерьевич", "Васильевич", "Викторович", "Витальевич",
     "Владимирович", "Вячеславович", "Геннадьевич", "Георгиевич",
@@ -65,7 +81,7 @@ val middleNamesMan = listOf(
     "Михайлович", "Николаевич", "Олегович", "Павлович", "Петрович"
 )
 
-val middleNamesWoman = listOf(
+val MIDDLE_NAMES_WOMAN = listOf(
     "Александровна", "Андреевна", "Аркадьевна", "Артёмовна", "Борисовна",
     "Вадимовна", "Валерьевна", "Васильевна", "Викторовна", "Витальевна",
     "Владимировна", "Вячеславовна", "Геннадьевна", "Георгиевна", "Данииловна",
@@ -74,7 +90,7 @@ val middleNamesWoman = listOf(
     "Николаевна", "Олеговна", "Павловна", "Петровна"
 )
 
-val regionNames = listOf(
+val REGION_NAMES = listOf(
     "Амурская", "Архангельская", "Астраханская", "Белгородская", "Брянская",
     "Владимирская", "Волгоградская", "Вологодская", "Воронежская", "Ивановская",
     "Иркутская", "Калининградская", "Калужская", "Кемеровская", "Кировская",
@@ -87,7 +103,7 @@ val regionNames = listOf(
     "Ярославская"
 )
 
-val streetNames = listOf(
+val STREET_NAMES = listOf(
     "Ленина", "Центральная", "Пушкина", "Советская", "Кирова",
     "Мира", "Школьная", "Красная", "Гагарина", "Садовая",
     "Новая", "Первомайская", "Строителей", "Солнечная", "Юбилейная",

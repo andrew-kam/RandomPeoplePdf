@@ -1,6 +1,3 @@
-import java.io.File
-
-
 fun main() {
 
     val countPeople = inputCountPeople()
@@ -9,12 +6,6 @@ fun main() {
         return
     }
 
-    val people = mutableListOf<List<String>>()
-    people.add(tableFieldNames)
-    repeat(countPeople) {
-        people.add(generateDataPerson())
-    }
-
-    createPdfFile(fileNamePdf, people)
-    println("Файл создан. Путь: ${File(fileNamePdf).absolutePath}")
+    val fileCreator: CreateFile = CreatePdfFile()
+    fileCreator.createFile(countPeople)
 }

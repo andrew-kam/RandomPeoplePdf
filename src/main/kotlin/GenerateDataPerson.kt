@@ -1,44 +1,53 @@
-import com.github.javafaker.Faker
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.Locale
 import kotlin.random.Random
 
 
-class GenerateFullNameAndGender {
+class GenerateDataPerson : GenerateData {
 
-    private val choiceGender = Random.nextBoolean()
+    override fun generateData(): List<String> {
 
-    fun generateFirstName() : String {
-        return if (choiceGender) firstNamesMan.random() else firstNamesWoman.random()
+        val choiceGender = Random.nextBoolean()
+        val choiceAge = Random.nextInt(MIN_AGE, MAX_AGE)
+
+        return listOf(
+            generateFirstName(choiceGender),
+            generateLastName(choiceGender),
+            generateMiddleName(choiceGender),
+            generateAge(choiceAge),
+            generateGender(choiceGender),
+            generateBirthDate(choiceAge),
+            generateCityName(),
+            generatePostalCode(),
+            generateNameCountry(),
+            generateRegionName(),
+            generateCityName(),
+            generateStreetName(),
+            generateHouseNumber(),
+            generateApartmentNumber()
+        )
     }
 
-    fun generateLastName() : String {
-        return if (choiceGender) lastNamesMan.random() else lastNamesWoman.random()
-    }
+    private fun generateFirstName(choiceGender: Boolean): String =
+        if (choiceGender) FIRST_NAMES_MAN.random() else FIRST_NAMES_WOMAN.random()
 
-    fun generateMiddleName() : String {
-        return if (choiceGender) middleNamesMan.random() else middleNamesWoman.random()
-    }
+    private fun generateLastName(choiceGender: Boolean): String =
+        if (choiceGender) LAST_NAMES_MAN.random() else LAST_NAMES_WOMAN.random()
 
-    fun generateGender() : String {
-        return if (choiceGender) male else female
-    }
-}
+    private fun generateMiddleName(choiceGender: Boolean): String =
+        if (choiceGender) MIDDLE_NAMES_MAN.random() else MIDDLE_NAMES_WOMAN.random()
 
-class GenerateBirthDataAndAge {
+    private fun generateGender(choiceGender: Boolean): String =
+        if (choiceGender) MALE else FEMALE
 
-    private val choiceAge = Random.nextInt(minAge, maxAge)
+    private fun generateAge(choiceAge: Int): String =
+        choiceAge.toString()
 
-    fun generateAge() : String {
-        return choiceAge.toString()
-    }
+    private fun generateBirthDate(choiceAge: Int): String {
 
-    fun generateBirthDate() : String {
-
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatter = DateTimeFormatter.ofPattern(DATE_FORMAT)
         val currentDate = LocalDate.now()
         val maxPeriod = Period.ofYears(choiceAge + 1)
         val minPeriod = Period.ofYears(choiceAge)
@@ -48,61 +57,25 @@ class GenerateBirthDataAndAge {
 
         return randomDate.format(formatter)
     }
-}
 
-fun generateCityName() : String {
-    val fake = Faker(Locale("ru_RU"))
-    return fake.address().city()
-}
+    private fun generateCityName(): String =
+        FAKE.address().city()
 
-fun generatePostalCode() : String {
-    return Random.nextInt(minZipCode, maxZipCode).toString()
-}
+    private fun generatePostalCode(): String =
+        Random.nextInt(MIN_ZIP_CODE, MAX_ZIP_CODE).toString()
 
-fun generateNameCountry() : String {
-    return nameCountry
-}
+    private fun generateNameCountry(): String =
+        NAME_COUNTRY
 
-fun generateRegionName() : String {
-    return regionNames.random()
-}
+    private fun generateRegionName(): String =
+        REGION_NAMES.random()
 
-fun generateStreetName() : String {
-    return streetNames.random()
-}
+    private fun generateStreetName(): String =
+        STREET_NAMES.random()
 
-fun generateHouseNumber() : String {
-    return Random.nextInt(minHouseNumber, maxHouseNumber).toString()
-}
+    private fun generateHouseNumber(): String =
+        Random.nextInt(MIN_HOUSE_NUMBER, MAX_HOUSE_NUMBER).toString()
 
-fun generateApartmentNumber() : String {
-    return Random.nextInt(minApartmentNumber, maxApartmentNumber).toString()
-}
-
-val tableFieldNames = listOf(
-    "Имя", "Фамилия", "Отчество", "Возраст","Пол", "Дата рождения", "Место рождения",
-    "Индекс", "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
-)
-
-fun generateDataPerson(): List<String> {
-    val fullNameAndGender = GenerateFullNameAndGender()
-
-    val birthDataAndAge = GenerateBirthDataAndAge()
-
-    return listOf(
-        fullNameAndGender.generateFirstName(),
-        fullNameAndGender.generateLastName(),
-        fullNameAndGender.generateMiddleName(),
-        birthDataAndAge.generateAge(),
-        fullNameAndGender.generateGender(),
-        birthDataAndAge.generateBirthDate(),
-        generateCityName(),
-        generatePostalCode(),
-        generateNameCountry(),
-        generateRegionName(),
-        generateCityName(),
-        generateStreetName(),
-        generateHouseNumber(),
-        generateApartmentNumber()
-    )
+    private fun generateApartmentNumber(): String =
+        Random.nextInt(MIN_APARTMENT_NUMBER, MAX_APARTMENT_NUMBER).toString()
 }

@@ -4,28 +4,40 @@ import com.itextpdf.text.Phrase
 import com.itextpdf.text.pdf.BaseFont
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
+import java.io.File
 import java.io.FileOutputStream
 
 
-fun createPdfFile(filePath: String, people: List<List<String>>) {
+class CreatePdfFile : CreateFile {
 
-    val document = Document(PageSize.A4)
-    PdfWriter.getInstance(document, FileOutputStream(filePath))
+    override fun createFile(countLines: Int) {
 
-    document.open()
-    val table = PdfPTable(people[0].size)
-    table.widthPercentage = 100f
+        val document = Document(PageSize.A4)
+        PdfWriter.getInstance(document, FileOutputStream(FILE_NAME_PDF))
 
-    val baseFont = BaseFont.createFont("src/main/resources/fonts/arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
-    val fontSize = 4f
-    val font = com.itextpdf.text.Font(baseFont, fontSize)
+        document.open()
+        val table = PdfPTable(TABLE_FIELD_NAMES.size)
+        table.widthPercentage = PAGE_WIDTH
 
-    for (person in people) {
-        for (cell in person) {
-            table.addCell(Phrase(cell, font))
+        val baseFont = BaseFont.createFont(PATH_FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+        val font = com.itextpdf.text.Font(baseFont, FONT_SIZE)
+
+        val dataGenerator: GenerateData = GenerateDataPerson()
+        val listOfListsData = mutableListOf<List<String>>()
+
+        listOfListsData.add(TABLE_FIELD_NAMES)
+        repeat(countLines) {
+            listOfListsData.add(dataGenerator.generateData())
         }
-    }
 
-    document.add(table)
-    document.close()
+        for (line in listOfListsData) {
+            for (cell in line) {
+                table.addCell(Phrase(cell, font))
+            }
+        }
+
+        document.add(table)
+        document.close()
+        println("Файл создан. Путь: ${File(FILE_NAME_PDF).absolutePath}")
+    }
 }

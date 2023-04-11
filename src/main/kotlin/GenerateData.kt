@@ -7,7 +7,7 @@ import java.util.Locale
 import kotlin.random.Random
 
 
-class GenerateFullNameAndGender() {
+class GenerateFullNameAndGender {
 
     private val choiceGender = Random.nextBoolean()
 
@@ -28,7 +28,7 @@ class GenerateFullNameAndGender() {
     }
 }
 
-class GenerateBirthDataAndAge() {
+class GenerateBirthDataAndAge {
 
     private val choiceAge = Random.nextInt(minAge, maxAge)
 
@@ -77,4 +77,32 @@ fun generateHouseNumber() : String {
 
 fun generateApartmentNumber() : String {
     return Random.nextInt(minApartmentNumber, maxApartmentNumber).toString()
+}
+
+val tableFieldNames = listOf(
+    "Имя", "Фамилия", "Отчество", "Возраст","Пол", "Дата рождения", "Место рождения",
+    "Индекс", "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
+)
+
+fun createPerson(): List<String> {
+    val fullNameAndGender = GenerateFullNameAndGender()
+
+    val birthDataAndAge = GenerateBirthDataAndAge()
+
+    return listOf(
+        fullNameAndGender.generateFirstName(),
+        fullNameAndGender.generateLastName(),
+        fullNameAndGender.generateMiddleName(),
+        birthDataAndAge.generateAge(),
+        fullNameAndGender.generateGender(),
+        birthDataAndAge.generateBirthDate(),
+        generateCityName(),
+        generatePostalCode(),
+        generateNameCountry(),
+        generateRegionName(),
+        generateCityName(),
+        generateStreetName(),
+        generateHouseNumber(),
+        generateApartmentNumber()
+    )
 }

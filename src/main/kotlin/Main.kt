@@ -9,12 +9,12 @@ fun main() {
         return
     }
 
-    val people = mutableListOf<Person>()
+    val people = mutableListOf<List<String>>()
+    people.add(tableFieldNames)
     repeat(countPeople) {
-        people.add(createInstancePerson())
+        people.add(createPerson())
     }
 
-    val pdfCreator = CreatePdf()
-    pdfCreator.createPdf(fileNamePdf, people)
+    createPdfFile(fileNamePdf, people)
     println("Файл создан. Путь: ${File(fileNamePdf).absolutePath}")
 }

@@ -14,3 +14,27 @@ data class Person(
     val houseNumber: String,
     val apartmentNumber: String
 )
+
+fun createInstancePerson(): Person {
+
+    val fullNameAndGender = GenerateFullNameAndGender()
+
+    val birthDataAndAge = GenerateBirthDataAndAge()
+
+    return Person(
+        firstName = fullNameAndGender.generateFirstName(),
+        lastName = fullNameAndGender.generateLastName(),
+        middleName = fullNameAndGender.generateMiddleName(),
+        age = birthDataAndAge.generateAge(),
+        gender = fullNameAndGender.generateGender(),
+        birthDate = birthDataAndAge.generateBirthDate(),
+        birthPlace = generateCityName(),
+        postalCode = generatePostalCode(),
+        country = generateNameCountry(),
+        region = generateRegionName(),
+        city = generateCityName(),
+        street = generateStreetName(),
+        houseNumber = generateHouseNumber(),
+        apartmentNumber = generateApartmentNumber()
+    )
+}

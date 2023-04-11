@@ -1,5 +1,4 @@
 import java.io.File
-import kotlin.random.Random
 
 
 fun main() {
@@ -11,9 +10,8 @@ fun main() {
     }
 
     val people = mutableListOf<Person>()
-    val personGenerator = GeneratePerson()
     repeat(countPeople) {
-        people.add(personGenerator.generatePerson(choiceGender = Random.nextBoolean()))
+        people.add(createInstancePerson())
     }
 
     val pdfCreator = CreatePdf()

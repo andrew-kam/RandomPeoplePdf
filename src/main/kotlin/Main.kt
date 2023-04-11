@@ -12,7 +12,7 @@ fun main() {
     val people = mutableListOf<List<String>>()
     people.add(tableFieldNames)
     repeat(countPeople) {
-        people.add(createPerson())
+        people.add(generateDataPerson())
     }
 
     createPdfFile(fileNamePdf, people)

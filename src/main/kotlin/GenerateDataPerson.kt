@@ -84,7 +84,7 @@ val tableFieldNames = listOf(
     "Индекс", "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
 )
 
-fun createPerson(): List<String> {
+fun generateDataPerson(): List<String> {
     val fullNameAndGender = GenerateFullNameAndGender()
 
     val birthDataAndAge = GenerateBirthDataAndAge()

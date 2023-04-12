@@ -22,15 +22,25 @@ class CreatePdfFile : CreateFile {
         val baseFont = BaseFont.createFont(fileSettings.pathFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
         val font = com.itextpdf.text.Font(baseFont, fileSettings.fontSize)
 
-        val listOfLines = mutableListOf<List<String>>()
+//        val listOfLines = mutableListOf<List<String>>()
+//
+//        listOfLines.add(fileSettings.headerFile)
+//        repeat(countLines) {
+//            listOfLines.add(dataGenerator.generateData())
+//        }
+//
+//        listOfLines.forEach { line ->
+//            line.forEach {
+//                table.addCell(Phrase(it, font))
+//            }
+//        }
 
-        listOfLines.add(fileSettings.headerFile)
-        repeat(countLines) {
-            listOfLines.add(dataGenerator.generateData())
+        fileSettings.headerFile.forEach {
+            table.addCell(Phrase(it, font))
         }
 
-        listOfLines.forEach { line ->
-            line.forEach {
+        repeat(countLines) {
+            dataGenerator.generateData().forEach {
                 table.addCell(Phrase(it, font))
             }
         }

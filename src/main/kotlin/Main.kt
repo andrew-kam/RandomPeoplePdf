@@ -8,8 +8,16 @@ fun main() {
 
     val pdfFileSettings = FileSettings(fileName = "people.pdf")
 
+    val headerFilePeople = listOf(
+        "Имя", "Фамилия", "Отчество", "Возраст","Пол",
+        "Дата рождения", "Место рождения", "Индекс",
+        "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
+    )
+
+    val dataGenerator = GenerateDataPerson()
+
     val fileCreator = CreatePdfFile()
-    fileCreator.createFile(countPeople, pdfFileSettings, TABLE_FIELD_NAMES)
+    fileCreator.createFile(pdfFileSettings, headerFilePeople, dataGenerator, countPeople)
 }
 
 private fun inputCountPeople(): Int {

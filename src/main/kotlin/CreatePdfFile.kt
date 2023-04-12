@@ -10,7 +10,8 @@ import java.io.FileOutputStream
 
 class CreatePdfFile : CreateFile {
 
-    override fun createFile(countLines: Int, fileSettings: FileSettings, headerFile: List<String>) {
+    override fun createFile(fileSettings: FileSettings, headerFile: List<String>,
+                            dataGenerator: GenerateData, countLines: Int) {
 
         val document = Document(PageSize.A4)
         PdfWriter.getInstance(document, FileOutputStream(fileSettings.fileName))
@@ -22,15 +23,14 @@ class CreatePdfFile : CreateFile {
         val baseFont = BaseFont.createFont(fileSettings.pathFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
         val font = com.itextpdf.text.Font(baseFont, fileSettings.fontSize)
 
-        val dataGenerator: GenerateData = GenerateDataPerson()
-        val listOfListsData = mutableListOf<List<String>>()
+        val listOfLines = mutableListOf<List<String>>()
 
-        listOfListsData.add(headerFile)
+        listOfLines.add(headerFile)
         repeat(countLines) {
-            listOfListsData.add(dataGenerator.generateData())
+            listOfLines.add(dataGenerator.generateData())
         }
 
-        listOfListsData.forEach { line ->
+        listOfLines.forEach { line ->
             line.forEach {
                 table.addCell(Phrase(it, font))
             }

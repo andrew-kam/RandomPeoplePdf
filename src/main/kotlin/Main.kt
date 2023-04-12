@@ -9,7 +9,7 @@ fun main() {
     val pdfFileSettings = FileSettings(fileName = "people.pdf")
 
     val headerFilePeople = listOf(
-        "Имя", "Фамилия", "Отчество", "Возраст","Пол",
+        "Имя", "Фамилия", "Отчество", "Возраст", "Пол",
         "Дата рождения", "Место рождения", "Индекс",
         "Страна", "Область", "Город", "Улица", "Дом", "Квартира"
     )
@@ -17,7 +17,14 @@ fun main() {
     val dataGenerator = GenerateDataPerson()
 
     val fileCreator = CreatePdfFile()
-    fileCreator.createFile(pdfFileSettings, headerFilePeople, dataGenerator, countPeople)
+
+    try {
+        fileCreator.createFile(pdfFileSettings, headerFilePeople, dataGenerator, countPeople)
+    } catch (e: Exception) {
+        println("Ошибка при создании файла, работа программы завершена!\n${e.message}]")
+        return
+    }
+
 }
 
 private fun inputCountPeople(): Int {

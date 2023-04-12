@@ -6,8 +6,10 @@ fun main() {
         return
     }
 
-    val fileCreator: CreateFile = CreatePdfFile()
-    fileCreator.createFile(countPeople)
+    val pdfFileSettings = FileSettings(fileName = "people.pdf")
+
+    val fileCreator = CreatePdfFile()
+    fileCreator.createFile(countPeople, pdfFileSettings, TABLE_FIELD_NAMES)
 }
 
 private fun inputCountPeople(): Int {

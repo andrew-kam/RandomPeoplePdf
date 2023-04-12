@@ -10,34 +10,34 @@ import java.io.FileOutputStream
 
 class CreatePdfFile : CreateFile {
 
-    override fun createFile(countLines: Int) {
+    override fun createFile(countLines: Int, fileSettings: FileSettings, headerFile: List<String>) {
 
         val document = Document(PageSize.A4)
-        PdfWriter.getInstance(document, FileOutputStream(FILE_NAME_PDF))
+        PdfWriter.getInstance(document, FileOutputStream(fileSettings.fileName))
 
         document.open()
-        val table = PdfPTable(TABLE_FIELD_NAMES.size)
-        table.widthPercentage = PAGE_WIDTH
+        val table = PdfPTable(headerFile.size)
+        table.widthPercentage = fileSettings.pageWidth
 
-        val baseFont = BaseFont.createFont(PATH_FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
-        val font = com.itextpdf.text.Font(baseFont, FONT_SIZE)
+        val baseFont = BaseFont.createFont(fileSettings.pathFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+        val font = com.itextpdf.text.Font(baseFont, fileSettings.fontSize)
 
         val dataGenerator: GenerateData = GenerateDataPerson()
         val listOfListsData = mutableListOf<List<String>>()
 
-        listOfListsData.add(TABLE_FIELD_NAMES)
+        listOfListsData.add(headerFile)
         repeat(countLines) {
             listOfListsData.add(dataGenerator.generateData())
         }
 
-        for (line in listOfListsData) {
-            for (cell in line) {
-                table.addCell(Phrase(cell, font))
+        listOfListsData.forEach { line ->
+            line.forEach {
+                table.addCell(Phrase(it, font))
             }
         }
 
         document.add(table)
         document.close()
-        println("Файл создан. Путь: ${File(FILE_NAME_PDF).absolutePath}")
+        println("Файл создан. Путь: ${File(fileSettings.fileName).absolutePath}")
     }
 }

@@ -59,7 +59,7 @@ class GenerateDataPerson : GenerateData {
     }
 
     private fun generateCityName(): String =
-        FAKE.address().city()
+        CITY_NAMES.random()
 
     private fun generatePostalCode(): String =
         Random.nextInt(MIN_ZIP_CODE, MAX_ZIP_CODE).toString()

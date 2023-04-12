@@ -10,14 +10,13 @@ import java.io.FileOutputStream
 
 class CreatePdfFile : CreateFile {
 
-    override fun createFile(fileSettings: FileSettings, headerFile: List<String>,
-                            dataGenerator: GenerateData, countLines: Int) {
+    override fun createFile(fileSettings: FileSettings, dataGenerator: GenerateData, countLines: Int) {
 
         val document = Document(PageSize.A4)
         PdfWriter.getInstance(document, FileOutputStream(fileSettings.fileName))
         document.open()
 
-        val table = PdfPTable(headerFile.size)
+        val table = PdfPTable(fileSettings.headerFile.size)
         table.widthPercentage = fileSettings.pageWidth
 
         val baseFont = BaseFont.createFont(fileSettings.pathFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
@@ -25,7 +24,7 @@ class CreatePdfFile : CreateFile {
 
         val listOfLines = mutableListOf<List<String>>()
 
-        listOfLines.add(headerFile)
+        listOfLines.add(fileSettings.headerFile)
         repeat(countLines) {
             listOfLines.add(dataGenerator.generateData())
         }

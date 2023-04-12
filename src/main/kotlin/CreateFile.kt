@@ -1,4 +1,3 @@
 interface CreateFile {
-    fun createFile(fileSettings: FileSettings, headerFile: List<String>,
-                   dataGenerator: GenerateData, countLines: Int)
+    fun createFile(fileSettings: FileSettings, dataGenerator: GenerateData, countLines: Int)
 }

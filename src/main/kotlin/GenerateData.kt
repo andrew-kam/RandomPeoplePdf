@@ -1,3 +1,3 @@
 interface GenerateData {
-    fun generateData() : List<String>
+    fun generateData(): List<String>
 }

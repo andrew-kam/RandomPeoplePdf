@@ -6,31 +6,14 @@ fun main() {
         return
     }
 
-    val pdfFileSettings = FileSettings(fileName = "people.pdf")
-
-    val headerFilePeople = listOf(
-        "Имя",
-        "Фамилия",
-        "Отчество",
-        "Возраст",
-        "Пол",
-        "Дата рождения",
-        "Место рождения",
-        "Индекс",
-        "Страна",
-        "Область",
-        "Город",
-        "Улица",
-        "Дом",
-        "Квартира"
-    )
+    val pdfFileSettings = FileSettings()
 
     val dataGenerator = GenerateDataPerson()
 
     val fileCreator = CreatePdfFile()
 
     try {
-        fileCreator.createFile(pdfFileSettings, headerFilePeople, dataGenerator, countPeople)
+        fileCreator.createFile(pdfFileSettings, dataGenerator, countPeople)
     } catch (e: Exception) {
         println("Ошибка при создании файла, работа программы завершена!\n${e.message}")
         return

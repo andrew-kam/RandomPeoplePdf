@@ -6,14 +6,10 @@ fun main() {
         return
     }
 
-    val pdfFileSettings = FileSettings()
-
-    val dataGenerator = GenerateDataPerson()
-
-    val fileCreator = CreatePdfFile()
-
     try {
-        fileCreator.createFile(pdfFileSettings, dataGenerator, countPeople)
+        CreatePdfFile().apply {
+            createFile(FileSettings(), GenerateDataPerson(), countPeople)
+        }
     } catch (e: Exception) {
         println("Ошибка при создании файла, работа программы завершена!\n${e.message}")
         return

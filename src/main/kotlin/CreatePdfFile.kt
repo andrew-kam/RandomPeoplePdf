@@ -15,8 +15,8 @@ class CreatePdfFile : CreateFile {
 
         val document = Document(PageSize.A4)
         PdfWriter.getInstance(document, FileOutputStream(fileSettings.fileName))
-
         document.open()
+
         val table = PdfPTable(headerFile.size)
         table.widthPercentage = fileSettings.pageWidth
 
@@ -38,6 +38,7 @@ class CreatePdfFile : CreateFile {
 
         document.add(table)
         document.close()
+
         println("Файл создан. Путь: ${File(fileSettings.fileName).absolutePath}")
     }
 }

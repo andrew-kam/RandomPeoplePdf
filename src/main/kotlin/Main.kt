@@ -1,7 +1,10 @@
 fun main() {
 
-    val countPeople = inputCountPeople()
-    if (countPeople == 0) {
+    val rangeCountPeople = 1..30
+
+    val countPeople = inputIntNumber(rangeCountPeople)
+
+    if ( countPeople !in rangeCountPeople) {
         println("Введены некорректные данные, работа программы завершена!")
         return
     }
@@ -16,18 +19,9 @@ fun main() {
     }
 }
 
-private fun inputCountPeople(): Int {
+private fun inputIntNumber(rangeNumber: IntRange): Int {
 
-    val minCountPeople = 1
-    val maxCountPeople = 30
+    println("Введите целое число в диапазоне [$rangeNumber]:")
 
-    println("Введите количество человек ($minCountPeople-$maxCountPeople):")
-
-    var countPeople = readlnOrNull()?.toIntOrNull() ?: 0
-
-    if (countPeople < minCountPeople || countPeople > maxCountPeople) {
-        countPeople = 0
-    }
-
-    return countPeople
+    return readlnOrNull()?.toIntOrNull() ?: 0
 }

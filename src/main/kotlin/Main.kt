@@ -10,7 +10,7 @@ fun main() {
     }
 
     try {
-        CreatePdfFile().apply {
+        CreateFilePdf().apply {
             createFile(FileSettings(), GenerateDataPerson(), countPeople)
         }
     } catch (e: Exception) {

@@ -8,7 +8,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 
-class CreatePdfFile : CreateFile {
+class CreateFilePdf : CreateFile {
 
     override fun createFile(fileSettings: FileSettings, dataGenerator: GenerateData, countLines: Int) {
 

@@ -4,7 +4,7 @@ fun main() {
 
     val countPeople = inputIntNumber(rangeCountPeople)
 
-    if ( countPeople !in rangeCountPeople) {
+    if (countPeople !in rangeCountPeople) {
         println("Введены некорректные данные, работа программы завершена!")
         return
     }

@@ -16,13 +16,13 @@ class CreatePdfFile : CreateFile {
         PdfWriter.getInstance(document, FileOutputStream(fileSettings.fileName))
         document.open()
 
-        val table = PdfPTable(fileSettings.headerFile.size)
+        val table = PdfPTable(fileSettings.fileHeader.size)
         table.widthPercentage = fileSettings.pageWidth
 
-        val baseFont = BaseFont.createFont(fileSettings.pathFont, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
+        val baseFont = BaseFont.createFont(fileSettings.fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
         val font = com.itextpdf.text.Font(baseFont, fileSettings.fontSize)
 
-        fileSettings.headerFile.forEach {
+        fileSettings.fileHeader.forEach {
             table.addCell(Phrase(it, font))
         }
 
